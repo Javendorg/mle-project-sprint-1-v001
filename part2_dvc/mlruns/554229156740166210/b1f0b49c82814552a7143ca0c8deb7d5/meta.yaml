@@ -1,0 +1,14 @@
+artifact_uri: file:///home/mle-user/mle_projects/mle-project-sprint-1-v001/part2_dvc/mlruns/554229156740166210/b1f0b49c82814552a7143ca0c8deb7d5/artifacts
+end_time: 1795546452538
+entry_point_name: ''
+experiment_id: '554229156740166210'
+lifecycle_stage: active
+run_id: b1f0b49c82814552a7143ca0c8deb7d5
+run_name: random-forest
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1795546414552
+status: 3
+tags: []
+user_id: mle-user

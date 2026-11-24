@@ -1,0 +1,12 @@
+data:
+  target: price
+  test_size: 0.2
+  random_state: 42
+
+model:
+  iterations: 1000
+  depth: 6
+  learning_rate: 0.03
+  loss_function: RMSE
+  random_seed: 42
+  thread_count: -1

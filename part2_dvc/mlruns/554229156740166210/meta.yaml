@@ -1,0 +1,9 @@
+artifact_location: file:///home/mle-user/mle_projects/mle-project-sprint-1-v001/part2_dvc/mlruns/554229156740166210
+creation_time: 1795545957059
+effective_trace_archival_retention: null
+experiment_id: '554229156740166210'
+last_update_time: 1795545957059
+lifecycle_stage: active
+name: apartment-price-regression
+trace_location: null
+workspace: default

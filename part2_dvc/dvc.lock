@@ -1,0 +1,87 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python scripts/prepare.py --input data/raw/flats_cleaned.csv 
+      --train-output data/processed/train.csv --test-output 
+      data/processed/test.csv --params params.yaml
+    deps:
+    - path: data/raw/flats_cleaned.csv
+      hash: md5
+      md5: 67e8c48ccbab3d04127d85735ff5ee4f
+      size: 21171853
+    - path: scripts/common.py
+      hash: md5
+      md5: 7abbedbff55c5a0ed2edb84372d88a2e
+      size: 2583
+    - path: scripts/prepare.py
+      hash: md5
+      md5: 835107f1e9dbdda1282f0182c822d89d
+      size: 1619
+    params:
+      params.yaml:
+        data.random_state: 42
+        data.test_size: 0.2
+    outs:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: 3292fbda55110af4dcce7df388949045
+      size: 3470042
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 994699284eb552c830339b041436eb4f
+      size: 13880203
+  train:
+    cmd: python scripts/train.py --train data/processed/train.csv --model-output
+      models/catboost.joblib --params params.yaml
+    deps:
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 994699284eb552c830339b041436eb4f
+      size: 13880203
+    - path: scripts/common.py
+      hash: md5
+      md5: 7abbedbff55c5a0ed2edb84372d88a2e
+      size: 2583
+    - path: scripts/train.py
+      hash: md5
+      md5: d697d4674d73b9c2c07eeffbca716819
+      size: 2923
+    params:
+      params.yaml:
+        model:
+          iterations: 1000
+          depth: 6
+          learning_rate: 0.03
+          loss_function: RMSE
+          random_seed: 42
+          thread_count: -1
+    outs:
+    - path: models/catboost.joblib
+      hash: md5
+      md5: a96b09fa1bfb528ca0e290464c01e290
+      size: 1120608
+  evaluate:
+    cmd: python scripts/evaluate.py --model models/catboost.joblib --test 
+      data/processed/test.csv --metrics cv_results/metrics.json
+    deps:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: 3292fbda55110af4dcce7df388949045
+      size: 3470042
+    - path: models/catboost.joblib
+      hash: md5
+      md5: a96b09fa1bfb528ca0e290464c01e290
+      size: 1120608
+    - path: scripts/common.py
+      hash: md5
+      md5: 7abbedbff55c5a0ed2edb84372d88a2e
+      size: 2583
+    - path: scripts/evaluate.py
+      hash: md5
+      md5: 94cce6d332f2b3ea9ec6b413a405548c
+      size: 1809
+    outs:
+    - path: cv_results/metrics.json
+      hash: md5
+      md5: 70960d5edf1119f841c32f49708fd56b
+      size: 147

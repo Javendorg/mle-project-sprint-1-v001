@@ -1,0 +1,10 @@
+artifact_location: file:///home/mle-user/mle_projects/mle-project-sprint-1-v001/part2_dvc/mlruns/554229156740166210/models/m-6e2b1f7c158646a2bec08063909d7f1b/artifacts
+creation_timestamp: 1795545957183
+experiment_id: '554229156740166210'
+last_updated_timestamp: 1795546062746
+model_id: m-6e2b1f7c158646a2bec08063909d7f1b
+model_type: null
+name: model
+source_run_id: de1f938dce634ad98337c3cf8a656cc5
+status: 3
+status_message: null

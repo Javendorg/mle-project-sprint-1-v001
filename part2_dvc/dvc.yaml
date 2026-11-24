@@ -1,0 +1,34 @@
+stages:
+  prepare:
+    cmd: python scripts/prepare.py --input data/raw/flats_cleaned.csv --train-output data/processed/train.csv --test-output data/processed/test.csv --params params.yaml
+    deps:
+      - scripts/prepare.py
+      - scripts/common.py
+      - data/raw/flats_cleaned.csv
+    params:
+      - data.test_size
+      - data.random_state
+    outs:
+      - data/processed/train.csv
+      - data/processed/test.csv
+
+  train:
+    cmd: python scripts/train.py --train data/processed/train.csv --model-output models/catboost.joblib --params params.yaml
+    deps:
+      - scripts/train.py
+      - scripts/common.py
+      - data/processed/train.csv
+    params:
+      - model
+    outs:
+      - models/catboost.joblib
+
+  evaluate:
+    cmd: python scripts/evaluate.py --model models/catboost.joblib --test data/processed/test.csv --metrics cv_results/metrics.json
+    deps:
+      - scripts/evaluate.py
+      - scripts/common.py
+      - models/catboost.joblib
+      - data/processed/test.csv
+    metrics:
+      - cv_results/metrics.json
